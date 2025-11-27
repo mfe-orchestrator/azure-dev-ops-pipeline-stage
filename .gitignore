@@ -7,6 +7,10 @@ yarn-error.log*
 lerna-debug.log*
 .DS_Store
 
+test-files
+test-mfe-*.zip
+.taskkey
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 

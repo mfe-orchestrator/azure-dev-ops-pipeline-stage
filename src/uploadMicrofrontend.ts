@@ -1,18 +1,18 @@
 import * as tl from 'azure-pipelines-task-lib/task';
 import * as path from 'path';
 import * as fs from 'fs';
-import * as archiver from 'archiver';
-import * as FormData from 'form-data';
-import * as fetch from 'node-fetch';
+import archiver from 'archiver';
+import FormData from 'form-data';
+import fetch from 'node-fetch';
 
-async function run() {
+export async function run() {
     try {
         // Get task inputs
-        const apiKey = tl.getInput('apiKey', true);
-        const microfrontendSlug = tl.getInput('microfrontendSlug', true);
-        const domain = tl.getInput('domain', true);
-        const filePath = tl.getPathInput('filePath', true);
-        const version = tl.getInput('version', true);
+        const apiKey = tl.getInput('apiKey', true)!;
+        const microfrontendSlug = tl.getInput('microfrontendSlug', true)!;
+        const domain = tl.getInput('domain', true)!;
+        const filePath = tl.getPathInput('filePath', true)!;
+        const version = tl.getInput('version', true)!;
 
         // Validate file exists
         if (!fs.existsSync(filePath)) {
@@ -70,10 +70,9 @@ async function run() {
 
         console.log('Upload completed successfully');
         tl.setResult(tl.TaskResult.Succeeded, 'Microfrontend uploaded successfully');
-        
+
     } catch (err) {
-        tl.setResult(tl.TaskResult.Failed, err.message);
+        const error = err as Error;
+        tl.setResult(tl.TaskResult.Failed, error.message);
     }
 }
-
-run();

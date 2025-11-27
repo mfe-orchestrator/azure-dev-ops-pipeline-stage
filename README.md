@@ -58,9 +58,44 @@ Add the following task to your Azure DevOps pipeline:
 ## Development
 
 1. Clone the repository
-2. Install dependencies: `npm install`
+2. Install dependencies: `pnpm install`
 3. Build the project: `npm run build`
-4. Test the task locally
+4. Test the task locally (see below)
+
+## Testing Locally
+
+You can test the task locally without installing it on Azure DevOps by using environment variables to simulate task inputs:
+
+```bash
+# 1. Build the project
+npm run build
+
+# 2. Create test files (optional)
+mkdir -p test-files
+echo "Test microfrontend content" > test-files/index.html
+echo "console.log('test');" > test-files/app.js
+
+# 3. Run the task with environment variables
+INPUT_APIKEY="test-api-key-123" \
+INPUT_MICROFRONTENDSLUG="test-mfe" \
+INPUT_DOMAIN="https://test-domain.com" \
+INPUT_FILEPATH="$(pwd)/test-files" \
+INPUT_VERSION="1.0.0-test" \
+node dist/index.js
+```
+
+This will:
+- Load all inputs from environment variables (pattern: `INPUT_<PARAMETER_NAME>`)
+- Create a zip file from the specified directory/file
+- Attempt to upload to the specified domain
+
+**Expected Output:**
+- The task will create a zip file named `<microfrontendSlug>-<version>.zip`
+- It will show debug information about the upload attempt
+- If using a test domain, you'll get a connection error (which is expected)
+
+**Testing with a real server:**
+Replace the environment variables with your actual API key, domain, and microfrontend slug.
 
 ## Publishing Updates
 
