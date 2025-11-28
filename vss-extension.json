@@ -4,6 +4,10 @@
   "version": "0.0.0",
   "name": "MFE Orchestrator Upload",
   "description": "Azure DevOps extension for uploading microfrontend bundles to MFE Orchestrator",
+  "public": true,
+  "galleryFlags": [
+      "Public"
+  ],
   "targets": [
     {
       "id": "Microsoft.VisualStudio.Services"
