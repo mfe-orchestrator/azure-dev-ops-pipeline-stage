@@ -13,7 +13,7 @@ This extension provides a custom task for Azure DevOps pipelines to upload micro
 Add the following task to your Azure DevOps pipeline:
 
 ```yaml
-- task: microfrontend-upload@1
+- task: mfe-orchestrator-upload@1
   displayName: 'Upload Microfrontend'
   inputs:
     apiKey: '$(API_KEY)'
@@ -27,8 +27,8 @@ Add the following task to your Azure DevOps pipeline:
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| apiKey | Yes | The API key for authentication |
-| microfrontendSlug | Yes | The slug identifier for the microfrontend |
-| domain | Yes | The base domain where the microfrontend will be uploaded |
-| filePath | Yes | The path to the file or directory to be zipped and uploaded |
-| version | Yes | The version of the microfrontend (e.g., 1.0.0) |
+| `apiKey` | Yes | The API key for authentication |
+| `microfrontendSlug` | Yes | The slug identifier for the microfrontend |
+| `domain` | No | The base domain where the microfrontend will be uploaded |
+| `filePath` | Yes | The path to the file or directory to be zipped and uploaded |
+| `version` | Yes | The version of the microfrontend (e.g., 1.0.0) |

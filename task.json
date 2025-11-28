@@ -1,6 +1,6 @@
 {
   "id": "a1e9a3f2-1234-5678-9abc-def123456789",
-  "name": "microfrontend-upload",
+  "name": "mfe-orchestrator-upload",
   "friendlyName": "MFE Orchestrator Upload",
   "description": "Upload a microfrontend bundle to MFE Orchestrator",
   "helpMarkDown": "",
@@ -34,7 +34,7 @@
       "type": "string",
       "label": "Domain",
       "defaultValue": "",
-      "required": true,
+      "required": false,
       "helpMarkDown": "The base domain where the microfrontend will be uploaded"
     },
     {

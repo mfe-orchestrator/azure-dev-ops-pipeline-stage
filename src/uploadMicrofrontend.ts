@@ -10,7 +10,7 @@ export async function run() {
         // Get task inputs
         const apiKey = tl.getInput('apiKey', true)!;
         const microfrontendSlug = tl.getInput('microfrontendSlug', true)!;
-        const domain = tl.getInput('domain', true)!;
+        const domain = tl.getInput('domain', true) || "https://console.mfe-orchestrator.dev";
         const filePath = tl.getPathInput('filePath', true)!;
         const version = tl.getInput('version', true)!;
 
