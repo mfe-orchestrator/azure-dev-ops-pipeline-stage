@@ -1,11 +1,11 @@
 {
   "id": "a1e9a3f2-1234-5678-9abc-def123456789",
   "name": "microfrontend-upload",
-  "friendlyName": "Microfrontend Upload",
-  "description": "Upload a microfrontend bundle to the specified domain",
+  "friendlyName": "MFE Orchestrator Upload",
+  "description": "Upload a microfrontend bundle to MFE Orchestrator",
   "helpMarkDown": "",
   "category": "Utility",
-  "author": "Your Name",
+  "author": "MFE Orchestrator",
   "version": {
     "Major": 1,
     "Minor": 0,
@@ -55,7 +55,7 @@
     }
   ],
   "execution": {
-    "Node16": {
+    "Node20": {
       "target": "dist/index.js"
     }
   }
