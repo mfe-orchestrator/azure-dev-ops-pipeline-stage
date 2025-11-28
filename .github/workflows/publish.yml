@@ -46,10 +46,10 @@ jobs:
         EXTENSION_FILE=$(ls -1 dist/*.vsix | head -1)
         
         # Publish the extension
-        tfx extension publish --vsix $EXTENSION_FILE --token $AZURE_DEVOPS_EXT_PAT --share-with your-organization
+        tfx extension publish --vsix $EXTENSION_FILE --token ${{ secrets.AZURE_MARKETPLACE_PAT }} --publisher ${{ secrets.AZURE_PUBLISHER_ID }} 
         
         # Optional: Update the extension if it already exists
-        # tfx extension update --vsix $EXTENSION_FILE --token $AZURE_DEVOPS_EXT_PAT
+        # tfx extension update --vsix $EXTENSION_FILE --token ${{ secrets.AZURE_MARKETPLACE_PAT }}
         
     - name: Upload extension package
       uses: actions/upload-artifact@v4
