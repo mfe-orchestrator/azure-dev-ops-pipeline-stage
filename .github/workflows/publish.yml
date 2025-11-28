@@ -34,11 +34,9 @@ jobs:
       run: pnpm build
         
     - name: Create extension package
-      run: tfx extension create --manifest-globs vss-extension.json --output-path dist
+      run: tfx extension create --manifest-globs vss-extension.json --output-path dist --publisher ${{ secrets.AZURE_PUBLISHER_ID }} 
         
     - name: Publish to Marketplace
-      env:
-        AZURE_DEVOPS_EXT_PAT: ${{ secrets.AZURE_DEVOPS_EXT_PAT }}
       run: |
         # Get the version from package.json
         VERSION=$(node -p "require('./package.json').version")
