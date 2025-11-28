@@ -50,15 +50,15 @@ export async function run() {
         const form = new FormData();
         form.append('file', fs.createReadStream(zipFileName));
 
-        const url = `${domain}/microfrontends/by-slug/${microfrontendSlug}/upload/${version}`;
+        const url = `${domain}/api/microfrontends/by-slug/${microfrontendSlug}/upload/${version}?apiKey=${apiKey}`;
         
         console.log(`Uploading to: ${url}`);
         
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${apiKey}`,
-                ...form.getHeaders()
+                ...form.getHeaders(),
+                'Accept': 'application/json'
             },
             body: form
         });
