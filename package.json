@@ -4,7 +4,7 @@
   "description": "Azure DevOps extension for uploading microfrontend bundles",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp task.json dist/task.json",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
