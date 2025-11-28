@@ -34,12 +34,13 @@ jobs:
       run: pnpm build
         
     - name: Create extension package
-      run: tfx extension create --manifest-globs vss-extension.json --output-path dist --publisher ${{ secrets.AZURE_PUBLISHER_ID }} 
+      run: |
+        # Extract version from tag (supports both v1.0.0 and 1.0.0)
+        VERSION=${GITHUB_REF_NAME#v}
+        tfx extension create --manifest-globs vss-extension.json --output-path dist --publisher ${{ secrets.AZURE_PUBLISHER_ID }} --version $VERSION 
         
     - name: Publish to Marketplace
       run: |
-        # Get the version from package.json
-        VERSION=$(node -p "require('./package.json').version")
         # Get the extension file
         EXTENSION_FILE=$(ls -1 dist/*.vsix | head -1)
         
@@ -47,7 +48,7 @@ jobs:
         tfx extension publish --vsix $EXTENSION_FILE --token ${{ secrets.AZURE_MARKETPLACE_PAT }} --publisher ${{ secrets.AZURE_PUBLISHER_ID }} 
         
         # Optional: Update the extension if it already exists
-        # tfx extension update --vsix $EXTENSION_FILE --token ${{ secrets.AZURE_MARKETPLACE_PAT }}
+        # tfx extension update --vsix $EXTENSION_FILE --token ${{ secrets.AZURE_MARKETPLACE_PAT }} --publisher ${{ secrets.AZURE_PUBLISHER_ID }} 
         
     - name: Upload extension package
       uses: actions/upload-artifact@v4
