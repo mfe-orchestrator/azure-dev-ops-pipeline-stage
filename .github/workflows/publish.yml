@@ -77,5 +77,5 @@ jobs:
     - name: Upload dist
       uses: actions/upload-artifact@v4
       with:
-        name: extension-package
+        name: complete-distribution
         path: dist/*
