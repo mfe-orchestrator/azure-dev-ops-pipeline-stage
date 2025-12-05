@@ -38,8 +38,15 @@ jobs:
         # Extract version from tag (supports both v1.0.0 and 1.0.0)
         VERSION=${GITHUB_REF_NAME#v}
         echo "version: $VERSION"
+
+        # Update vss-extension.json
         jq ".version = \"$VERSION\"" vss-extension.json > vss-extension.tmp.json
         mv vss-extension.tmp.json vss-extension.json
+
+        # Update task.json with Major.Minor.Patch format
+        IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+        jq ".version.Major = ($MAJOR | tonumber) | .version.Minor = ($MINOR | tonumber) | .version.Patch = ($PATCH | tonumber)" task.json > task.tmp.json
+        mv task.tmp.json task.json
         
     - name: Create extension package
       run: |
