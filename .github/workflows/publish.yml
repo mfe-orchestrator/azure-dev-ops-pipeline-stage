@@ -29,9 +29,6 @@ jobs:
       run: |
         pnpm install -g tfx-cli
         pnpm install
-        
-    - name: Build extension
-      run: pnpm build
 
     - name: Set extension version
       run: |
@@ -47,10 +44,9 @@ jobs:
         IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
         jq ".version.Major = ($MAJOR | tonumber) | .version.Minor = ($MINOR | tonumber) | .version.Patch = ($PATCH | tonumber)" task.json > task.tmp.json
         mv task.tmp.json task.json
-        
-        cat task.json
-        echo "---"
-        cat vss-extension.json
+
+    - name: Build extension
+      run: pnpm build
 
     - name: Create extension package
       run: |
