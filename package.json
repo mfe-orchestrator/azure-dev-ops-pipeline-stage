@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc && cp task.json dist/task.json && cp overview.md dist/overview.md",
+    "build:complete": "tsc && esbuild src/index.ts --bundle --platform=node --target=node20 --outfile=dist/index.js && cp task.json dist/task.json && cp overview.md dist/overview.md",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,7 +17,6 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@types/archiver": "^7.0.0",
     "archiver": "^7.0.1",
     "azure-pipelines-task-lib": "^5.2.2",
     "form-data": "^4.0.5",
@@ -24,8 +24,10 @@
     "tfx-cli": "^0.22.2"
   },
   "devDependencies": {
+    "@types/archiver": "^7.0.0",
     "@types/node": "^24.10.1",
     "@types/node-fetch": "^2.6.13",
+    "esbuild": "^0.27.1",
     "typescript": "^5.9.3"
   }
 }

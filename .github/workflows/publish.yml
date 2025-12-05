@@ -22,13 +22,10 @@ jobs:
         cache-dependency-path: './pnpm-lock.yaml'
         cache: 'pnpm'
     
-    - name: Install Dependencies
-      run: pnpm install
-        
     - name: Install dependencies
       run: |
         pnpm install -g tfx-cli
-        pnpm install
+        pnpm install --shamefully-hoist
 
     - name: Set extension version
       run: |
@@ -46,7 +43,7 @@ jobs:
         mv task.tmp.json task.json
 
     - name: Build extension
-      run: pnpm build
+      run: pnpm build:complete
 
     - name: Create extension package
       run: |
