@@ -48,6 +48,10 @@ jobs:
         jq ".version.Major = ($MAJOR | tonumber) | .version.Minor = ($MINOR | tonumber) | .version.Patch = ($PATCH | tonumber)" task.json > task.tmp.json
         mv task.tmp.json task.json
         
+        cat task.json
+        echo "---"
+        cat vss-extension.json
+
     - name: Create extension package
       run: |
         tfx extension create --manifest-globs vss-extension.json --output-path dist --publisher ${{ secrets.AZURE_PUBLISHER_ID }}
@@ -69,3 +73,9 @@ jobs:
       with:
         name: extension-package
         path: dist/*.vsix
+
+    - name: Upload dist
+      uses: actions/upload-artifact@v4
+      with:
+        name: extension-package
+        path: dist/*
